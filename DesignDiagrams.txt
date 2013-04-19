@@ -1,6 +1,0 @@
-This is the area where all the design diagrams are kept.
-
-Such as:
-
-	Class Diagram
-	Protocol Diagram
