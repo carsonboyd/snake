@@ -1,4 +1,3 @@
-package server;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -116,7 +115,7 @@ public class Game {
 
 		// open up a stream to be used to send the data to the players.
 
-		String jsonString = "{\"snake\":";
+		String jsonString = "{\"snakes\": {";
 
 		for (int i = 0; i < 2; i++) {
 
@@ -128,7 +127,7 @@ public class Game {
 			// System.out.println(player.getSnake().getSnakeBody().size());
 			// System.out.println("Finished at variables");
 
-			jsonString += "{\"snake" + (i + 1) + "\":[";
+			jsonString += "\"snake" + (i + 1) + "\":[";
 
 			for (int j = 0; j < player.getSnake().getSnakeBody().size(); j++) {
 
@@ -146,38 +145,40 @@ public class Game {
 				}
 
 			}
-			jsonString += "]}";
-
+			if (i == 0)
+				jsonString += "],";
+			else 
+				jsonString += "]}";
 		}
 
 		jsonString += "}";
 
 		// go through items
 
-		Item[] items = snakeGame.getGame().getItems();
+		// Item[] items = snakeGame.getGame().getItems();
 
-		jsonString += "{\"item\":";
+		// jsonString += "{\"item\":";
 
-		for (int i = 0; i < snakeGame.getGame().getItemCount(); i++) {
+		// for (int i = 0; i < snakeGame.getGame().getItemCount(); i++) {
 
-			// newBoard.getGrid().put(items[i].getLocation(), "ITEM");
+		// 	// newBoard.getGrid().put(items[i].getLocation(), "ITEM");
 
-			System.out.println("1 = " + items[i]);
-			System.out.println("2 = " + items[i].getLocation());
-			System.out.println("3 = " + items[i].getLocation().x);
-			System.out.println("4 = " + items[i].getLocation().y);
+		// 	System.out.println("1 = " + items[i]);
+		// 	System.out.println("2 = " + items[i].getLocation());
+		// 	System.out.println("3 = " + items[i].getLocation().x);
+		// 	System.out.println("4 = " + items[i].getLocation().y);
 
-			jsonString += "{\"item" + (i + 1) + "\":[{\"x\":"
-					+ items[i].getLocation().x + ",\"y\":"
-					+ items[i].getLocation().y + "]}";
+		// 	jsonString += "{\"item" + (i + 1) + "\":[{\"x\":"
+		// 			+ items[i].getLocation().x + ",\"y\":"
+		// 			+ items[i].getLocation().y + "]}";
 
-			if (!(i == snakeGame.getGame().getItems().length - 1)) {
+		// 	if (!(i == snakeGame.getGame().getItems().length - 1)) {
 
-				jsonString += ",";
+		// 		jsonString += ",";
 
-			}
+		// 	}
 
-		}
+		// }
 
 		System.out.println(jsonString);
 
@@ -187,12 +188,19 @@ public class Game {
 
 				outputWriter = new PrintWriter(players[i].getSocket()
 						.getOutputStream(), true);
+
 				outputWriter.println(jsonString);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
+			// catch (org.json.JSONException e)
+			// {
+			// 	System.out.println("ERRRORRRR>..");
+			// 	System.out.println(jsonString);
+			// 	e.printStackTrace();
+			// }
 		}
 
 	}
@@ -270,17 +278,13 @@ public class Game {
 				direction = (String) jsonObj.get("direction");
 				System.out.println(direction);
 
-				switch (direction) {
-
-				case "l":
+				if (direction.equals("l")) {
 					direction = "LEFT";
-					break;
-
-				case "r":
-					direction = "RIGHT";
-					break;
-
 				}
+				else if (direction.equals("r")) {
+					direction = "RIGHT";
+				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -446,28 +450,22 @@ public class Game {
 		System.out.println(action);
 		System.out.println(player.getSnake());
 
-		switch (action) {
-
-		case "LEFT":
-			System.out.println("Left Move");
+		if (action.equals("LEFT")) {
+			// System.out.println("Left Move");
 			getGame().moveSnake(player.getSnake(), action);
-			break;
-
-		case "RIGHT":
-			System.out.println("Right Move");
+		}
+		else if (action.equals("RIGHT")) {
+			// System.out.println("Right Move");
 			getGame().moveSnake(player.getSnake(), action);
-			break;
-
-		case "INCREASE":
-			System.out.println("Increase Speed");
-			break;
-
-		case "DECREASE":
-			System.out.println("Decrease Speed");
-			break;
-
-		default:
-			break;
+		}
+		else if (action.equals("INCREASE")) {
+			// System.out.println("Increase Speed");
+		}
+		else if (action.equals("DECREASE")) {
+			// System.out.println("Decrease Speed");
+		}
+		else {
+			return;
 		}
 
 	}

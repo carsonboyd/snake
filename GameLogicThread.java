@@ -1,4 +1,4 @@
-package server;
+
 
 import java.awt.Point;
 import java.util.Collection;
@@ -164,20 +164,17 @@ public class GameLogicThread extends Thread {
 
 		Point head = snake.getSnakeBody().get(0);
 
-		switch (direction) {
-
-		case "L":
+		if (direction.equals("L")) {
 			return new Point(head.x, head.y + 1);
-
-		case "R":
+		}
+		else if (direction.equals("R")) {
 			return new Point(head.x, head.y - 1);
-
-		case "U":
+		}
+		else if (direction.equals("U")) {
 			return new Point(head.x - 1, head.y);
-
-		case "D":
+		}
+		else if (direction.equals("D")) {
 			return new Point(head.x + 1, head.y);
-
 		}
 
 		return null;
@@ -192,21 +189,19 @@ public class GameLogicThread extends Thread {
 
 		Point head = snake.getSnakeBody().get(0);
 
-		switch (direction) {
-
-		case "L":
+		if (direction.equals("L")) {
 			return new Point(head.x, head.y - 1);
-
-		case "R":
-			return new Point(head.x, head.y + 1);
-
-		case "U":
-			return new Point(head.x + 1, head.y);
-
-		case "D":
-			return new Point(head.x - 1, head.y);
-
 		}
+		else if (direction.equals("R")) {
+			return new Point(head.x, head.y + 1);
+		}
+		else if (direction.equals("U")) {
+			return new Point(head.x + 1, head.y);
+		}
+		else if (direction.equals("D")) {
+			return new Point(head.x - 1, head.y);
+		}
+
 		return null;
 
 	}
@@ -219,21 +214,19 @@ public class GameLogicThread extends Thread {
 		Point head = snake.getSnakeBody().get(0);
 		System.out.println("Hiya " + direction);
 
-		switch (direction) {
-
-		case "L":
+		if (direction.equals("L")) {
 			return new Point(head.x - 1, head.y);
-
-		case "R":
-			return new Point(head.x + 1, head.y);
-
-		case "U":
-			return new Point(head.x, head.y - 1);
-
-		case "D":
-			return new Point(head.x, head.y + 1);
-
 		}
+		else if (direction.equals("R")) {
+			return new Point(head.x + 1, head.y);
+		}
+		else if (direction.equals("U")) {
+			return new Point(head.x, head.y - 1);
+		}
+		else if (direction.equals("D")) {
+			return new Point(head.x, head.y + 1);
+		}
+
 		return null;
 
 	}
@@ -292,25 +285,19 @@ public class GameLogicThread extends Thread {
 		}
 
 		System.out.println(direction + "," + command);
-		switch (command) {
-
-		case "LEFT":
-			System.out.println("Now going Left");
+		if (command.equals("LEFT")) {
+			//System.out.println("Now going Left");
 			headPoint = left(snake, direction);
-			System.out.println(headPoint);
-			break;
-
-		case "RIGHT":
-			System.out.println("Now going Right");
+			//System.out.println(headPoint);
+		}
+		else if (command.equals("RIGHT")) {
+			//System.out.println("Now going Right");
 			headPoint = right(snake, direction);
-			System.out.println(headPoint);
-			break;
-
-		default:
-			System.out.println("Now going Forward");
+			//System.out.println(headPoint);
+		}
+		else {
+			//System.out.println("Now going Forward");
 			headPoint = forward(snake, direction);
-			break;
-
 		}
 
 		System.out.println("Before Tailoff");
