@@ -1,4 +1,3 @@
-
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,8 +36,8 @@ public class Game {
 		setServer(null);
 		setPlayers(null);
 		setGame(null);
-		setBoardWidth(55);
-		setBoardHeight(55);
+		setBoardWidth(30);
+		setBoardHeight(30);
 
 	}
 
@@ -147,7 +146,7 @@ public class Game {
 			}
 			if (i == 0)
 				jsonString += "],";
-			else 
+			else
 				jsonString += "]}";
 		}
 
@@ -161,22 +160,22 @@ public class Game {
 
 		// for (int i = 0; i < snakeGame.getGame().getItemCount(); i++) {
 
-		// 	// newBoard.getGrid().put(items[i].getLocation(), "ITEM");
+		// // newBoard.getGrid().put(items[i].getLocation(), "ITEM");
 
-		// 	System.out.println("1 = " + items[i]);
-		// 	System.out.println("2 = " + items[i].getLocation());
-		// 	System.out.println("3 = " + items[i].getLocation().x);
-		// 	System.out.println("4 = " + items[i].getLocation().y);
+		// System.out.println("1 = " + items[i]);
+		// System.out.println("2 = " + items[i].getLocation());
+		// System.out.println("3 = " + items[i].getLocation().x);
+		// System.out.println("4 = " + items[i].getLocation().y);
 
-		// 	jsonString += "{\"item" + (i + 1) + "\":[{\"x\":"
-		// 			+ items[i].getLocation().x + ",\"y\":"
-		// 			+ items[i].getLocation().y + "]}";
+		// jsonString += "{\"item" + (i + 1) + "\":[{\"x\":"
+		// + items[i].getLocation().x + ",\"y\":"
+		// + items[i].getLocation().y + "]}";
 
-		// 	if (!(i == snakeGame.getGame().getItems().length - 1)) {
+		// if (!(i == snakeGame.getGame().getItems().length - 1)) {
 
-		// 		jsonString += ",";
+		// jsonString += ",";
 
-		// 	}
+		// }
 
 		// }
 
@@ -194,12 +193,12 @@ public class Game {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
+			}
 			// catch (org.json.JSONException e)
 			// {
-			// 	System.out.println("ERRRORRRR>..");
-			// 	System.out.println(jsonString);
-			// 	e.printStackTrace();
+			// System.out.println("ERRRORRRR>..");
+			// System.out.println(jsonString);
+			// e.printStackTrace();
 			// }
 		}
 
@@ -274,17 +273,17 @@ public class Game {
 
 		if (receivedMessage.contains("direction")) {
 			try {
+
 				JSONObject jsonObj = new JSONObject(receivedMessage);
 				direction = (String) jsonObj.get("direction");
 				System.out.println(direction);
 
 				if (direction.equals("l")) {
 					direction = "LEFT";
-				}
-				else if (direction.equals("r")) {
+				} else if (direction.equals("r")) {
 					direction = "RIGHT";
 				}
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -360,7 +359,7 @@ public class Game {
 
 				try {
 
-					Thread.sleep(1000);
+					Thread.sleep(500);
 
 				} catch (InterruptedException e) {
 
@@ -453,19 +452,15 @@ public class Game {
 		if (action.equals("LEFT")) {
 			// System.out.println("Left Move");
 			getGame().moveSnake(player.getSnake(), action);
-		}
-		else if (action.equals("RIGHT")) {
+		} else if (action.equals("RIGHT")) {
 			// System.out.println("Right Move");
 			getGame().moveSnake(player.getSnake(), action);
-		}
-		else if (action.equals("INCREASE")) {
+		} else if (action.equals("INCREASE")) {
 			// System.out.println("Increase Speed");
-		}
-		else if (action.equals("DECREASE")) {
+		} else if (action.equals("DECREASE")) {
 			// System.out.println("Decrease Speed");
-		}
-		else {
-			return;
+		} else {
+			getGame().moveSnake(player.getSnake(), action);
 		}
 
 	}

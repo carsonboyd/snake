@@ -1,9 +1,5 @@
-
-
 import java.awt.Point;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
@@ -19,7 +15,7 @@ public class GameLogicThread extends Thread {
 
 	public GameLogicThread(Game snakeGame) {
 
-		setBoard(new Board(55, 55));
+		setBoard(new Board(30, 30));
 		setItems(new Item[snakeGame.getMaxPlayers() - 1]);
 		setSnakeGame(snakeGame);
 
@@ -117,7 +113,7 @@ public class GameLogicThread extends Thread {
 
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(200);
 
 			} catch (InterruptedException e) {
 
@@ -166,14 +162,11 @@ public class GameLogicThread extends Thread {
 
 		if (direction.equals("L")) {
 			return new Point(head.x, head.y + 1);
-		}
-		else if (direction.equals("R")) {
+		} else if (direction.equals("R")) {
 			return new Point(head.x, head.y - 1);
-		}
-		else if (direction.equals("U")) {
+		} else if (direction.equals("U")) {
 			return new Point(head.x - 1, head.y);
-		}
-		else if (direction.equals("D")) {
+		} else if (direction.equals("D")) {
 			return new Point(head.x + 1, head.y);
 		}
 
@@ -191,14 +184,11 @@ public class GameLogicThread extends Thread {
 
 		if (direction.equals("L")) {
 			return new Point(head.x, head.y - 1);
-		}
-		else if (direction.equals("R")) {
+		} else if (direction.equals("R")) {
 			return new Point(head.x, head.y + 1);
-		}
-		else if (direction.equals("U")) {
+		} else if (direction.equals("U")) {
 			return new Point(head.x + 1, head.y);
-		}
-		else if (direction.equals("D")) {
+		} else if (direction.equals("D")) {
 			return new Point(head.x - 1, head.y);
 		}
 
@@ -216,14 +206,11 @@ public class GameLogicThread extends Thread {
 
 		if (direction.equals("L")) {
 			return new Point(head.x - 1, head.y);
-		}
-		else if (direction.equals("R")) {
+		} else if (direction.equals("R")) {
 			return new Point(head.x + 1, head.y);
-		}
-		else if (direction.equals("U")) {
+		} else if (direction.equals("U")) {
 			return new Point(head.x, head.y - 1);
-		}
-		else if (direction.equals("D")) {
+		} else if (direction.equals("D")) {
 			return new Point(head.x, head.y + 1);
 		}
 
@@ -286,17 +273,15 @@ public class GameLogicThread extends Thread {
 
 		System.out.println(direction + "," + command);
 		if (command.equals("LEFT")) {
-			//System.out.println("Now going Left");
+			// System.out.println("Now going Left");
 			headPoint = left(snake, direction);
-			//System.out.println(headPoint);
-		}
-		else if (command.equals("RIGHT")) {
-			//System.out.println("Now going Right");
+			// System.out.println(headPoint);
+		} else if (command.equals("RIGHT")) {
+			// System.out.println("Now going Right");
 			headPoint = right(snake, direction);
-			//System.out.println(headPoint);
-		}
-		else {
-			//System.out.println("Now going Forward");
+			// System.out.println(headPoint);
+		} else {
+			// System.out.println("Now going Forward");
 			headPoint = forward(snake, direction);
 		}
 

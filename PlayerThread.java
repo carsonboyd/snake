@@ -1,4 +1,3 @@
-
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -58,6 +57,7 @@ public class PlayerThread extends Thread {
 				System.out.println("CARSONSKADKDKSJD ==== " + message);
 
 				snakeGame.requestChange(this, message);
+				message = null;
 
 			} catch (NullPointerException npe) {
 
