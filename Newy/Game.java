@@ -36,8 +36,8 @@ public class Game {
 		setServer(null);
 		setPlayers(null);
 		setGame(null);
-		setBoardWidth(55);
-		setBoardHeight(55);
+		setBoardWidth(30);
+		setBoardHeight(30);
 
 	}
 

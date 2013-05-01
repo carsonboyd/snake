@@ -52,8 +52,8 @@ public final class Client {
 					model.setSnakeOneDots(getListOfPoints(arraySnake1));
 					model.setSnakeTwoDots(getListOfPoints(arraySnake2));
 
-					System.out.println(arraySnake1);
-					System.out.println(arraySnake2);
+					//System.out.println(arraySnake1);
+					//System.out.println(arraySnake2);
 
 					// Thread.sleep(100);
 				} catch (Exception e) {

@@ -15,7 +15,7 @@ public class GameLogicThread extends Thread {
 
 	public GameLogicThread(Game snakeGame) {
 
-		setBoard(new Board(55, 55));
+		setBoard(new Board(30, 30));
 		setItems(new Item[snakeGame.getMaxPlayers() - 1]);
 		setSnakeGame(snakeGame);
 
