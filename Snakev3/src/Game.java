@@ -150,9 +150,10 @@ public class Game {
 				jsonString += "]}";
 		}
 
-		jsonString += "}";
+		jsonString += ", \"food\": [{\"x\": 4,\"y\": 4},{\"x\": 7,\"y\": 7}]";
 
 		// go through items
+		jsonString += "}";
 
 		// Item[] items = snakeGame.getGame().getItems();
 

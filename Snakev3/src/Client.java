@@ -45,16 +45,17 @@ public final class Client {
 					// System.out.println(receivedMessage);
 					// outputWriter.println("waiting");
 					JSONObject jsonObj = new JSONObject(receivedMessage);
-					// System.out.println(jsonObj);
+					System.out.println(jsonObj);
 					JSONObject twoSnakes = jsonObj.getJSONObject("snakes");
 					JSONArray arraySnake1 = twoSnakes.getJSONArray("snake1");
 					JSONArray arraySnake2 = twoSnakes.getJSONArray("snake2");
 					model.setSnakeOneDots(getListOfPoints(arraySnake1));
 					model.setSnakeTwoDots(getListOfPoints(arraySnake2));
-
-					System.out.println(arraySnake1);
-					System.out.println(arraySnake2);
-
+				 	if(jsonObj.has("food")) {
+						JSONArray array = jsonObj.getJSONArray("food");
+						model.setAppleDots(getListOfPoints(array));
+						// System.out.println(array);
+ 					}
 					// Thread.sleep(100);
 				} catch (Exception e) {
 					e.printStackTrace();
