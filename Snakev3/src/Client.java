@@ -42,7 +42,7 @@ public final class Client {
 				String receivedMessage = inputReader.readLine();
 				System.out.println(receivedMessage);
 				try {
-					// System.out.println(receivedMessage);
+					System.out.println(receivedMessage);
 					// outputWriter.println("waiting");
 					JSONObject jsonObj = new JSONObject(receivedMessage);
 					System.out.println(jsonObj);

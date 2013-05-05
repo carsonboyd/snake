@@ -142,13 +142,11 @@ public class Game {
 				jsonString += "]}";
 		}
 
-		jsonString += "}";
-
 		// go through items
 
 		Item[] items = snakeGame.getGame().getItems();
 
-		jsonString += "{\"food\":[";
+		jsonString += ", \"food\":[";
 
 		for (int i = 0; i < snakeGame.getGame().getItemCount(); i++) {
 
