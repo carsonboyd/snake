@@ -42,15 +42,22 @@ public final class Client {
 				String receivedMessage = inputReader.readLine();
 				System.out.println(receivedMessage);
 				try {
-					System.out.println(receivedMessage);
-					// outputWriter.println("waiting");
 					JSONObject jsonObj = new JSONObject(receivedMessage);
-					System.out.println(jsonObj);
-					JSONObject twoSnakes = jsonObj.getJSONObject("snakes");
-					JSONArray arraySnake1 = twoSnakes.getJSONArray("snake1");
-					JSONArray arraySnake2 = twoSnakes.getJSONArray("snake2");
-					model.setSnakeOneDots(getListOfPoints(arraySnake1));
-					model.setSnakeTwoDots(getListOfPoints(arraySnake2));
+					JSONObject snakes = jsonObj.getJSONObject("snakes");
+					JSONArray snake1 = snakes.optJSONArray("snake1");
+					JSONArray snake2 = snakes.optJSONArray("snake2");
+					JSONArray snake3 = snakes.optJSONArray("snake3");
+					JSONArray snake4 = snakes.optJSONArray("snake4");
+
+					if (snake1 != null)
+						model.setSnakeOnePoints(getListOfPoints(snake1));
+					if (snake2 != null)
+						model.setSnakeTwoPoints(getListOfPoints(snake2));
+					if (snake3 != null)
+						model.setSnakeThreePoints(getListOfPoints(snake3));
+					if (snake4 != null)
+						model.setSnakeFourPoints(getListOfPoints(snake4));
+
 					if (jsonObj.has("food")) {
 						JSONArray array = jsonObj.getJSONArray("food");
 						model.setAppleDots(getListOfPoints(array));
@@ -67,7 +74,7 @@ public final class Client {
 
 						JSONObject jsonDir = new JSONObject("{\"direction\" : "
 								+ direction + "}");
-						// System.out.println(jsonDir);
+
 						outputWriter.println(jsonDir + "\n");
 						outputWriter.flush();
 

@@ -39,17 +39,21 @@ public final class SnakePanel extends JPanel {
 		}
 
 		// paint snakes
-		List<List<Point>> twoSnakeDots = model.getTwoSnakesDots();
-		for (int i = 0; i < twoSnakeDots.size(); i++) {
+		List<List<Point>> snakePoints = model.getSnakePoints();
+		for (int i = 0; i < snakePoints.size(); i++) {
 			Color snakeColor;
 			if (i == 0) {
 				snakeColor = Color.blue;
-			} else {
+			} else if (i == 1) {
 				snakeColor = Color.orange;
+			} else if (i == 2) {
+				snakeColor = Color.green;
+			} else {
+				snakeColor = Color.pink;
 			}
 
 			g.setColor(snakeColor);
-			for (Point snakeDot : twoSnakeDots.get(i)) {
+			for (Point snakeDot : snakePoints.get(i)) {
 				paintDots(snakeDot, g);
 			}
 		}

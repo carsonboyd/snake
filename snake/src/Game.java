@@ -2,7 +2,6 @@ import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -12,7 +11,6 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 public class Game {
 
@@ -138,9 +136,15 @@ public class Game {
 			}
 			if (i == 0)
 				jsonString += "],";
-			else
-				jsonString += "]}";
+			else 
+				jsonString +="],";
+			// TODO: Re-add this
+			// else
+			// 	jsonString += "]}";
 		}
+		
+		jsonString += "\"snake3\":[{\"x\":9,\"y\":1},{\"x\":8,\"y\":1},{\"x\":7,\"y\":1}],";
+		jsonString += "\"snake4\":[{\"x\":5,\"y\":3},{\"x\":6,\"y\":3},{\"x\":7,\"y\":3}]}";
 
 		// go through items
 
