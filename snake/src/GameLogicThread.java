@@ -50,41 +50,82 @@ public class GameLogicThread extends Thread {
 		cornerBoard.put(getCorners()[2], null);
 		cornerBoard.put(getCorners()[3], null);
 
-		// first player
-		PlayerThread player1 = snakeGame.getPlayers()[0];
+		if (this.snakes.length >= 1) {
+			// first player
+			PlayerThread player1 = snakeGame.getPlayers()[0];
 
-		Snake snake1 = player1.getSnake();
+			Snake snake1 = player1.getSnake();
 
-		LinkedList<Point> body1 = new LinkedList<Point>();
+			LinkedList<Point> body1 = new LinkedList<Point>();
 
-		body1.add(new Point(2, 0));
-		body1.add(new Point(1, 0));
-		body1.add(new Point(0, 0));
+			body1.add(new Point(5, 0));
+			body1.add(new Point(4, 0));
+			body1.add(new Point(3, 0));
+			body1.add(new Point(2, 0));
+			body1.add(new Point(1, 0));
+			body1.add(new Point(0, 0));
 
-		snake1.setLength(3);
-		snake1.setSnakeBody(body1);
+			snake1.setLength(3);
+			snake1.setSnakeBody(body1);
+		}
+		if (this.snakes.length >= 2)
+		{
+			PlayerThread player2 = snakeGame.getPlayers()[1];
 
-		PlayerThread player2 = snakeGame.getPlayers()[1];
+			Snake snake2 = player2.getSnake();
 
-		Snake snake2 = player2.getSnake();
+			LinkedList<Point> body2 = new LinkedList<Point>();
 
-		LinkedList<Point> body2 = new LinkedList<Point>();
+			body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
+					snakeGame.getGame().getBoard().getHeight() - 1));
+			body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
+					snakeGame.getGame().getBoard().getHeight() - 1));
 
-		body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
-				snakeGame.getGame().getBoard().getHeight() - 1));
-		body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
-				snakeGame.getGame().getBoard().getHeight() - 1));
+			snake2.setSnakeBody(body2);
+		}
+		// if (this.snakes.length == 3)
+		// {
+		// 	PlayerThread player3 = snakeGame.getPlayers()[1];
 
-		snake2.setSnakeBody(body2);
+		// 	Snake snake3 = player3.getSnake();
 
-		Item[] newList = new Item[2];
+		// 	LinkedList<Point> body3 = new LinkedList<Point>();
+
+		// 	body3.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
+		// 			snakeGame.getGame().getBoard().getHeight() - 1));
+		// 	body3.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
+		// 			snakeGame.getGame().getBoard().getHeight() - 1));
+
+		// 	snake3.setSnakeBody(body3);
+		// }
+		// if (this.snakes.length == 4)
+		// {
+		// 	PlayerThread player4 = snakeGame.getPlayers()[1];
+
+		// 	Snake snake4 = player4.getSnake();
+
+		// 	LinkedList<Point> body4 = new LinkedList<Point>();
+
+		// 	body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
+		// 			snakeGame.getGame().getBoard().getHeight() - 1));
+		// 	body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
+		// 			snakeGame.getGame().getBoard().getHeight() - 1));
+
+		// 	snake4.setSnakeBody(body4);
+		// }
+
+		Item[] newList = new Item[4];
 
 		snakeGame.getGame().setItems(newList);
 		newList[0] = generateItem();
+		newList[1] = generateItem();
+		newList[2] = generateItem();
+		newList[3] = generateItem();
 		snakeGame.getGame().setItems(newList);
+		setItemCount(4);
 
-		System.out.println("This is the point we are looking for = "
-				+ snakeGame.getGame().getItems()[0]);
+		// System.out.println("This is the point we are looking for = "
+		//		+ snakeGame.getGame().getItems()[0]);
 		// generateItem();
 
 		snakeGame.getPlayers()[0].start();
@@ -97,7 +138,7 @@ public class GameLogicThread extends Thread {
 
 			try {
 
-				Thread.sleep(500);
+				Thread.sleep(200);
 
 			} catch (InterruptedException e) {
 
@@ -118,7 +159,8 @@ public class GameLogicThread extends Thread {
 	 * @param game
 	 * @param snake
 	 */
-	public void grow(Snake snake, Game game) {// TODO
+	public void grow(Snake snake, Game game) {
+		// TODO
 
 	}
 
@@ -253,16 +295,16 @@ public class GameLogicThread extends Thread {
 
 			if (xValue == -1) {
 
-				System.out.println("GOING LEFT");
-				System.out.println("x = " + xValue);
-				System.out.println("y = " + yValue);
+				// System.out.println("GOING LEFT");
+				// System.out.println("x = " + xValue);
+				// System.out.println("y = " + yValue);
 				return "L";
 
 			} else if (xValue == 1) {
 
-				System.out.println("GOING RIGHT");
-				System.out.println("x = " + xValue);
-				System.out.println("y = " + yValue);
+				// System.out.println("GOING RIGHT");
+				// System.out.println("x = " + xValue);
+				// System.out.println("y = " + yValue);
 				return "R";
 
 			} else if (xValue <= -1) {
@@ -276,12 +318,12 @@ public class GameLogicThread extends Thread {
 
 			if (yValue == -1) {
 
-				System.out.println("GOING UP");
+				// System.out.println("GOING UP");
 				return "U";
 
 			} else if (yValue == 1) {
 
-				System.out.println("GOING DOWN");
+				// System.out.println("GOING DOWN");
 				return "D";
 
 			} else if (yValue <= -1) {
@@ -303,33 +345,33 @@ public class GameLogicThread extends Thread {
 
 		for (int i = 0; i < snake.getSnakeBody().size(); i++) {
 
-			System.out.println(snake.getSnakeBody().get(i));
+			// System.out.println(snake.getSnakeBody().get(i));
 
 		}
 
-		System.out.println(direction + "," + command);
+		// System.out.println(direction + "," + command);
 		if (command.equals("LEFT")) {
-			// System.out.println("Now going Left");
+			// // System.out.println("Now going Left");
 			headPoint = left(snake, direction);
-			// System.out.println(headPoint);
+			// // System.out.println(headPoint);
 		} else if (command.equals("RIGHT")) {
-			// System.out.println("Now going Right");
+			// // System.out.println("Now going Right");
 			headPoint = right(snake, direction);
-			// System.out.println(headPoint);
+			// // System.out.println(headPoint);
 		} else if (command.equals("FORWARD")) {
 			headPoint = forward(snake, direction);
 		} else {
-			// System.out.println("Now going Forward");
+			// // System.out.println("Now going Forward");
 			headPoint = forward(snake, direction);
 		}
 
-		System.out.println("Before Tailoff");
+		// System.out.println("Before Tailoff");
 
 		snake.setSnakeBody(tailFollow(snake, headPoint));
 
 		for (int i = 0; i < snake.getSnakeBody().size(); i++) {
 
-			System.out.println(snake.getSnakeBody().get(i));
+			// System.out.println(snake.getSnakeBody().get(i));
 
 		}
 
@@ -339,12 +381,12 @@ public class GameLogicThread extends Thread {
 
 		LinkedList<Point> newSnake = new LinkedList<Point>();
 
-		System.out.println("Before Snake Tail off return1");
+		// System.out.println("Before Snake Tail off return1");
 		newSnake.add(headPoint);
 		Point prev = snake.getSnakeBody().get(0);
-		System.out.println("Before Snake Tail off return1");
+		// System.out.println("Before Snake Tail off return1");
 		int size = snake.getSnakeBody().size();
-		System.out.println("Over HERE = " + size);
+		// System.out.println("Over HERE = " + size);
 		if (size == 2) {
 
 			newSnake.add(prev);
@@ -352,16 +394,16 @@ public class GameLogicThread extends Thread {
 		} else {
 			for (int i = 1; i < size; i++) {
 
-				System.out.println("Prev = " + prev);
+				// System.out.println("Prev = " + prev);
 				newSnake.add(prev);
 				prev = snake.getSnakeBody().get(i);
-				System.out.println("Prev = " + prev);
-				System.out.println("Before Snake Tail off return " + i);
+				// System.out.println("Prev = " + prev);
+				// System.out.println("Before Snake Tail off return " + i);
 
 			}
 		}
 
-		System.out.println("Before Snake Tail off return2");
+		// System.out.println("Before Snake Tail off return2");
 
 		return newSnake;
 
@@ -387,8 +429,8 @@ public class GameLogicThread extends Thread {
 
 				Point bodyPoint = snakes[i].getSnakeBody().get(j);
 
-				System.out.println(headPoint.toString());
-				System.out.println(bodyPoint.toString());
+				// System.out.println(headPoint.toString());
+				// System.out.println(bodyPoint.toString());
 
 				if (headPoint.x == bodyPoint.x && headPoint.y == bodyPoint.y) {
 
@@ -399,36 +441,34 @@ public class GameLogicThread extends Thread {
 			}
 
 			// check for items
-
 			for (int j = 0; j < itemCount; j++) {
 
 				Point itemPoint = items[j].getLocation();
-
-				if (headPoint.x == itemPoint.y && headPoint.y == itemPoint.y) {
-
-					itemCollision(snakes[i], itemPoint, snakeGame);
-
+				if (headPoint.x == itemPoint.x && headPoint.y == itemPoint.y) 
+				{
+					items[j] = generateItem();
+					snakes[i].grow(new Point(itemPoint.x, itemPoint.y));
+					break;
 				}
-
 			}
 
 			// check against others
 
-			for (int j = 1; j < snakes.length; j++) {
+			// for (int j = 1; j < snakes.length; j++) {
 
-				for (int k = 0; k < snakes[j].getSnakeBody().size(); k++) {
+			// 	for (int k = 0; k < snakes[j].getSnakeBody().size(); k++) {
 
-					Point bodyPoint = snakes[j].getSnakeBody().get(j);
+			// 		Point bodyPoint = snakes[j].getSnakeBody().get(j);
 
-					if (headPoint.x == bodyPoint.y
-							&& headPoint.y == bodyPoint.y) {
+			// 		if (headPoint.x == bodyPoint.y
+			// 				&& headPoint.y == bodyPoint.y) {
 
-						snakeCollision(snakes[i], snakes[j], snakeGame);
+			// 			snakeCollision(snakes[i], snakes[j], snakeGame);
 
-					}
-				}
+			// 		}
+			// 	}
 
-			}
+			// }
 
 		}
 
@@ -436,15 +476,8 @@ public class GameLogicThread extends Thread {
 
 	public void itemCollision(Snake snake, Point item, Game game) {
 
-		grow(snake, game);
+		// grow(snake, game);
 		removeItem(item); // in removeItem generateItem
-
-	}
-
-	public void removeItem(Point item) {
-
-		// removal of item from the list
-		// generate an item from the method to add to the list.
 
 	}
 
@@ -475,10 +508,10 @@ public class GameLogicThread extends Thread {
 
 		int snakeNum = 0;
 		for (int i = 0; i < game.getPlayerCount() - 1; i++) {
-			System.out.println(game.getPlayers());
-			System.out.println(game.getPlayers()[0]);
-			System.out.println(game.getPlayers()[0].getSnake());
-			System.out.println(i);
+			// System.out.println(game.getPlayers());
+			// System.out.println(game.getPlayers()[0]);
+			// System.out.println(game.getPlayers()[0].getSnake());
+			// System.out.println(i);
 
 			if (game.getPlayers()[i].getSnake() == snake) {
 				snakeNum = i;
@@ -501,7 +534,7 @@ public class GameLogicThread extends Thread {
 	 */
 	public void winner() {// TODO
 
-		System.out.println("There is a winner");
+		// System.out.println("There is a winner");
 		System.exit(0);
 
 	}
@@ -563,10 +596,10 @@ public class GameLogicThread extends Thread {
 
 			// newBoard.getGrid().put(items[i].getLocation(), "ITEM");
 
-			System.out.println("1 = " + items[i]);
-			System.out.println("2 = " + items[i].getLocation());
-			System.out.println("3 = " + items[i].getLocation().x);
-			System.out.println("4 = " + items[i].getLocation().y);
+			// System.out.println("1 = " + items[i]);
+			// System.out.println("2 = " + items[i].getLocation());
+			// System.out.println("3 = " + items[i].getLocation().x);
+			// System.out.println("4 = " + items[i].getLocation().y);
 
 			jsonString += "{\"x\":" + items[i].getLocation().x + ",\"y\":"
 					+ items[i].getLocation().y + "]}";
@@ -580,7 +613,7 @@ public class GameLogicThread extends Thread {
 		}
 		jsonString += "]";
 
-		System.out.println(jsonString);
+		// System.out.println(jsonString);
 
 		snakeGame.getGame().setBoard(newBoard);
 
@@ -594,6 +627,22 @@ public class GameLogicThread extends Thread {
 	 * all
 	 */
 	public void displayBoard() {
+
+	}
+
+	public void removeItem(Point item) {
+
+		System.out.println(item);
+		try 
+		{
+			generateItem();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}	
+		// removal of item from the list
+		// generate an item from the method to add to the list.
 
 	}
 
@@ -638,8 +687,8 @@ public class GameLogicThread extends Thread {
 
 			}
 
-			System.out.println("Item C0unt = "
-					+ snakeGame.getGame().getItemCount());
+			// System.out.println("Item C0unt = "
+			//		+ snakeGame.getGame().getItemCount());
 
 			if (snakeGame.getGame().getItemCount() == 0) {
 
@@ -665,7 +714,7 @@ public class GameLogicThread extends Thread {
 		}
 
 		Item newItem = new Item(randomLocation.x, randomLocation.y);
-		setItemCount(getItemCount() + 1);
+		// setItemCount(getItemCount() + 1);
 
 		return newItem;
 

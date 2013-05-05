@@ -14,7 +14,7 @@ public final class SnakeFrame extends JFrame {
 
 	public SnakeFrame(SnakeModel model) {
 		panel = new SnakePanel(model);
-		this.setSize(288, 308);
+		this.setSize(600, 620);
 
 		JPanel scoreHolder = new JPanel(new BorderLayout());
 

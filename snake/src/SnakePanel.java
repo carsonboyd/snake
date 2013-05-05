@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
@@ -5,8 +6,8 @@ import java.util.List;
 import javax.swing.JPanel;
 
 public final class SnakePanel extends JPanel {
-	private final static int SIZE = 300;
-	private final static int ROWS = 11; // need to add one extra
+    private final static int SIZE = 600;
+    private final static int ROWS = 50;
 	private SnakeModel model;
 
 	public SnakePanel(SnakeModel model) {

@@ -40,4 +40,8 @@ public class Snake {
 		this.snakeBody = snakeBody;
 	}
 
+	public void grow(Point point) {
+		this.snakeBody.add(point);
+	}
+
 }

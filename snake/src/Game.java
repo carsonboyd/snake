@@ -34,8 +34,8 @@ public class Game {
 		setServer(null);
 		setPlayers(null);
 		setGame(null);
-		setBoardWidth(10);
-		setBoardHeight(10);
+		setBoardWidth(60);
+		setBoardHeight(60);
 
 	}
 
@@ -64,10 +64,10 @@ public class Game {
 
 		while (listeningSocket) {
 
-			System.out.print("Start " + numClients);
+			// System.out.print("Start " + numClients);
 			numClients = addPlayer(snakeGame, numClients);
 			// numClients = numClients + 1;
-			System.out.println(" Finish " + numClients);
+			// System.out.println(" Finish " + numClients);
 
 			if (snakeGame.getPlayerCount() == snakeGame.getMaxPlayers()) {
 
@@ -109,12 +109,12 @@ public class Game {
 		for (int i = 0; i < 2; i++) {
 
 			PlayerThread player = snakeGame.getPlayers()[i];
-			// System.out.println("Starting at variables" + i);
-			// System.out.println(player);
-			// // System.out.println(player.getSnake());
-			// System.out.println(player.getSnake().getSnakeBody());
-			// System.out.println(player.getSnake().getSnakeBody().size());
-			// System.out.println("Finished at variables");
+			// // System.out.println("Starting at variables" + i);
+			// // System.out.println(player);
+			// // // System.out.println(player.getSnake());
+			// // System.out.println(player.getSnake().getSnakeBody());
+			// // System.out.println(player.getSnake().getSnakeBody().size());
+			// // System.out.println("Finished at variables");
 
 			jsonString += "\"snake" + (i + 1) + "\":[";
 
@@ -156,10 +156,10 @@ public class Game {
 
 			// newBoard.getGrid().put(items[i].getLocation(), "ITEM");
 
-			System.out.println("1 = " + items[i]);
-			System.out.println("2 = " + items[i].getLocation());
-			System.out.println("3 = " + items[i].getLocation().x);
-			System.out.println("4 = " + items[i].getLocation().y);
+			// System.out.println("1 = " + items[i]);
+			// System.out.println("2 = " + items[i].getLocation());
+			// System.out.println("3 = " + items[i].getLocation().x);
+			// System.out.println("4 = " + items[i].getLocation().y);
 
 			jsonString += "{\"x\":" + items[i].getLocation().x + ",\"y\":"
 					+ items[i].getLocation().y + "}";
@@ -173,7 +173,7 @@ public class Game {
 		}
 		jsonString += "]}";
 
-		System.out.println(jsonString);
+		// System.out.println(jsonString);
 
 		for (int i = 0; i < 2; i++) {
 
@@ -189,8 +189,8 @@ public class Game {
 			}
 			// catch (org.json.JSONException e)
 			// {
-			// System.out.println("ERRRORRRR>..");
-			// System.out.println(jsonString);
+			// // System.out.println("ERRRORRRR>..");
+			// // System.out.println(jsonString);
 			// e.printStackTrace();
 			// }
 		}
@@ -241,10 +241,10 @@ public class Game {
 		String message = null;
 		String direction = null;
 
-		System.out.println();
-		System.out.println(socket.getLocalPort());
-		System.out.println(socket.getPort());
-		System.out.println();
+		// System.out.println();
+		// System.out.println(socket.getLocalPort());
+		// System.out.println(socket.getPort());
+		// System.out.println();
 
 		try {
 			inputReader = new BufferedReader(new InputStreamReader(
@@ -263,14 +263,14 @@ public class Game {
 			e1.printStackTrace();
 		}
 
-		System.out.println("Carson was Here !!!! " + receivedMessage);
+		// System.out.println("Carson was Here !!!! " + receivedMessage);
 
 		if (receivedMessage.contains("direction")) {
 			try {
 
 				JSONObject jsonObj = new JSONObject(receivedMessage);
 				direction = (String) jsonObj.get("direction");
-				System.out.println(direction);
+				// System.out.println(direction);
 
 				if (direction.equals("l")) {
 					direction = "LEFT";
@@ -292,7 +292,7 @@ public class Game {
 		// if (!socket.getInputStream().equals(null)) {
 		//
 		// ois = new ObjectInputStream(socket.getInputStream());
-		// System.out.println("OIS = " + ois);
+		// // System.out.println("OIS = " + ois);
 		// message = (String) ois.readObject();
 		// ois.close();
 		// }
@@ -300,7 +300,7 @@ public class Game {
 		//
 		// e.printStackTrace();
 		// }
-		// System.out.println(" Message = " + message);
+		// // System.out.println(" Message = " + message);
 
 		return direction;
 
@@ -329,7 +329,7 @@ public class Game {
 
 				// I think since there is still a socket
 				// it must erase the first object to create a new one
-				System.out.println(" Disconnecting Next Server...");
+				// System.out.println(" Disconnecting Next Server...");
 				clientSocket = snakeGame.getServer().accept();
 				clientSocket.close();
 				numClients = numClients - 1;
@@ -374,7 +374,7 @@ public class Game {
 					// initialise the players array, determined by the first
 					// player
 
-					// System.out.println(snakeGame.getPlayers().length);
+					// // System.out.println(snakeGame.getPlayers().length);
 					// if (snakeGame.getPlayers().length == 0) {
 					//
 					// // send message to client to request a number of players
@@ -402,15 +402,15 @@ public class Game {
 					// */
 					//
 					// }
-					System.out.println();
-					System.out.println("ClientSocket = " + clientSocket);
+					// System.out.println();
+					// System.out.println("ClientSocket = " + clientSocket);
 					PlayerThread player = new PlayerThread(clientSocket,
 							snakeGame.getServer(), snakeGame);
 
 					// include the first player as number one in the list.
 
-					System.out.println("Player Count = "
-							+ snakeGame.getPlayerCount());
+					// System.out.println("Player Count = "
+					//		+ snakeGame.getPlayerCount());
 
 					snakeGame.getPlayers()[snakeGame.getPlayerCount()] = player;
 
@@ -419,9 +419,9 @@ public class Game {
 
 					snakeGame.setPlayerCount(snakeGame.getPlayerCount() + 1);
 					// player.start();
-					System.out.println("Max Players = "
-							+ snakeGame.getMaxPlayers() + " Player Count = "
-							+ snakeGame.getPlayerCount());
+					// System.out.println("Max Players = "
+					//		+ snakeGame.getMaxPlayers() + " Player Count = "
+					//		+ snakeGame.getPlayerCount());
 
 				}
 
@@ -442,19 +442,19 @@ public class Game {
 	 */
 	public synchronized void requestChange(PlayerThread player, String action) {// TODO
 
-		System.out.println(action);
-		System.out.println(player.getSnake());
+		// System.out.println(action);
+		// System.out.println(player.getSnake());
 
 		if (action.equals("LEFT")) {
-			// System.out.println("Left Move");
+			// // System.out.println("Left Move");
 			getGame().moveSnake(player.getSnake(), action);
 		} else if (action.equals("RIGHT")) {
-			// System.out.println("Right Move");
+			// // System.out.println("Right Move");
 			getGame().moveSnake(player.getSnake(), action);
 		} else if (action.equals("INCREASE")) {
-			// System.out.println("Increase Speed");
+			// // System.out.println("Increase Speed");
 		} else if (action.equals("DECREASE")) {
-			// System.out.println("Decrease Speed");
+			// // System.out.println("Decrease Speed");
 		} else {
 			getGame().moveSnake(player.getSnake(), action);
 		}

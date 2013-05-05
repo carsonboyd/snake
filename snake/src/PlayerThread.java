@@ -17,10 +17,10 @@ public class PlayerThread extends Thread {
 		this.setSnakeGame(snakeGame);
 		this.setSnake(new Snake());
 
-		System.out.println(clientSocket);
-		System.out.println(serverSocket);
-		System.out.println(snakeGame);
-		System.out.println(getSnake());
+		// System.out.println(clientSocket);
+		// System.out.println(serverSocket);
+		// System.out.println(snakeGame);
+		// System.out.println(getSnake());
 
 	}
 
@@ -41,7 +41,7 @@ public class PlayerThread extends Thread {
 			try {
 
 				// receive message
-				System.out.println("Message block!!!");
+				// System.out.println("Message block!!!");
 				message = snakeGame.receiveMessage(getSocket());
 
 			} catch (Exception e) {
@@ -52,7 +52,7 @@ public class PlayerThread extends Thread {
 
 			// requestUpdate on the message to the GameLogicThread
 			try {
-				System.out.println("CARSONSKADKDKSJD ==== " + message);
+				// System.out.println("CARSONSKADKDKSJD ==== " + message);
 
 				snakeGame.requestChange(this, message);
 				message = null;
@@ -77,7 +77,7 @@ public class PlayerThread extends Thread {
 
 		}
 
-		System.out.println("I hope carson isn;t here");
+		// System.out.println("I hope carson isn;t here");
 
 	}
 
