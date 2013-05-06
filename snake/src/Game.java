@@ -23,7 +23,7 @@ public class Game {
 
 	private int playerCount = 0;
 
-	private int maxPlayers = 2;
+	private int maxPlayers = 4;
 
 	/**
 	 * Constructor method that initialises the Game Object
@@ -34,9 +34,8 @@ public class Game {
 		setServer(null);
 		setPlayers(null);
 		setGame(null);
-		setBoardWidth(60);
-		setBoardHeight(60);
-
+		setBoardWidth(50);
+		setBoardHeight(50);
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class Game {
 
 		String jsonString = "{\"snakes\": {";
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 4; i++) {
 
 			PlayerThread player = snakeGame.getPlayers()[i];
 			// // System.out.println("Starting at variables" + i);
@@ -135,18 +134,17 @@ public class Game {
 					}
 				}
 			}
-			
-			if (i == 0)
-				jsonString += "],";
+
+			if (i == 3)
+				jsonString += "]";
 			else 
 				jsonString +="],";
 			// TODO: Re-add this
 			// else
-			// 	jsonString += "]}";
 		}
-		
-		jsonString += "\"snake3\":[{\"x\":9,\"y\":1},{\"x\":8,\"y\":1},{\"x\":7,\"y\":1}],";
-		jsonString += "\"snake4\":[{\"x\":5,\"y\":3},{\"x\":6,\"y\":3},{\"x\":7,\"y\":3}]}";
+		jsonString += "}";
+		// jsonString += "\"snake3\":[{\"x\":9,\"y\":1},{\"x\":8,\"y\":1},{\"x\":7,\"y\":1}],";
+		// jsonString += "\"snake4\":[{\"x\":5,\"y\":3},{\"x\":6,\"y\":3},{\"x\":7,\"y\":3}]}";
 
 		// go through items
 
@@ -177,7 +175,7 @@ public class Game {
 
 		// System.out.println(jsonString);
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 4; i++) {
 
 			try {
 

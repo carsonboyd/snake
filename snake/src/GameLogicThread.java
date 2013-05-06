@@ -4,11 +4,15 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
+
+
 public class GameLogicThread extends Thread {
+
+static int count = 1;
 
 	private Board board; // the board that the snakes will be travelling along
 	private Item[] items; // the list of positions of the items on the map
-	private Snake[] snakes; // list of snakes
+	private Snake[] snakes = new Snake[4]; // list of snakes
 	private Game snakeGame;
 	private Point[] corners;
 
@@ -20,7 +24,7 @@ public class GameLogicThread extends Thread {
 				snakeGame.getBoardHeight()));
 		setItems(new Item[snakeGame.getMaxPlayers() - 1]);
 		setSnakeGame(snakeGame);
-		setSnakes(new Snake[2]); // TODO generalise the number of players
+		setSnakes(new Snake[4]); // TODO generalise the number of players
 
 	}
 
@@ -58,13 +62,17 @@ public class GameLogicThread extends Thread {
 
 			LinkedList<Point> body1 = new LinkedList<Point>();
 
-			body1.add(new Point(3, 0));
-			body1.add(new Point(2, 0));
-			body1.add(new Point(1, 0));
-			body1.add(new Point(0, 0));
+			body1.add(new Point(40, 40));
+			body1.add(new Point(39, 40));
+			body1.add(new Point(38, 40));
+			body1.add(new Point(37, 40));
 
-			snake1.setLength(3);
+			Point head;
+			snake1.setLength(4);
 			snake1.setSnakeBody(body1);
+			head = snake1.getSnakeBody().get(0);
+			head  = left(snake1, "U");
+			snake1.setSnakeBody(tailFollow(snake1, head));
 		}
 		if (this.snakes.length >= 2)
 		{
@@ -79,48 +87,86 @@ public class GameLogicThread extends Thread {
 			// body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
 			// 		snakeGame.getGame().getBoard().getHeight() - 1));
 
-			body2.add(new Point(10, 1));
-			body2.add(new Point(9, 1));
-			body2.add(new Point(8, 1));
-			body2.add(new Point(7, 1));
-			body2.add(new Point(6, 1));
-			body2.add(new Point(5, 1));
-			body2.add(new Point(4, 1));
-			body2.add(new Point(3, 1));
-			body2.add(new Point(2, 1));
-			body2.add(new Point(1, 1));
+			body2.add(new Point(10, 40));
+			body2.add(new Point(9, 40));
+			body2.add(new Point(8, 40));
+			body2.add(new Point(7, 40));
 
+			Point head;
+			snake2.setLength(4);
 			snake2.setSnakeBody(body2);
+			head = snake2.getSnakeBody().get(0);
+			head  = right(snake2, "U");
+			snake2.setSnakeBody(tailFollow(snake2, head));
 		}
-		// if (this.snakes.length == 3)
-		// {
-		// 	PlayerThread player3 = snakeGame.getPlayers()[1];
+		if (this.snakes.length >= 3)
+		{
+			System.out.println("YOLOSWAG...er");
 
-		// 	Snake snake3 = player3.getSnake();
+			PlayerThread player3 = snakeGame.getPlayers()[2];
 
-		// 	LinkedList<Point> body3 = new LinkedList<Point>();
+			Snake snake3 = player3.getSnake();
 
-		// 	body3.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
-		// 			snakeGame.getGame().getBoard().getHeight() - 1));
-		// 	body3.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
-		// 			snakeGame.getGame().getBoard().getHeight() - 1));
+			LinkedList<Point> body3 = new LinkedList<Point>();
 
-		// 	snake3.setSnakeBody(body3);
-		// }
+
+			body3.add(new Point(40, 10));
+			body3.add(new Point(39, 10));
+			body3.add(new Point(38, 10));
+			body3.add(new Point(37, 10));
+
+			Point head;
+			snake3.setLength(4);
+			snake3.setSnakeBody(body3);
+			head = snake3.getSnakeBody().get(0);
+			head  = left(snake3, "U");
+			snake3.setSnakeBody(tailFollow(snake3, head));
+			System.out.println(snake3.getSnakeBody());
+		}
+		if (this.snakes.length == 4)
+		{
+			PlayerThread player4 = snakeGame.getPlayers()[3];
+
+			Snake snake4 = player4.getSnake();
+
+			LinkedList<Point> body4 = new LinkedList<Point>();
+
+			// body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
+			// 		snakeGame.getGame().getBoard().getHeight() - 1));
+			// body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
+			// 		snakeGame.getGame().getBoard().getHeight() - 1));
+
+			body4.add(new Point(10, 10));
+			body4.add(new Point(9, 10));
+			body4.add(new Point(8, 10));
+			body4.add(new Point(7, 10));
+
+			Point head;
+			snake4.setLength(4);
+			snake4.setSnakeBody(body4);
+			head = snake4.getSnakeBody().get(0);
+			head  = right(snake4, "U");
+			snake4.setSnakeBody(tailFollow(snake4, head));
+		}
 		// if (this.snakes.length == 4)
 		// {
-		// 	PlayerThread player4 = snakeGame.getPlayers()[1];
+		// 	PlayerThread player4 = snakeGame.getPlayers()[3];
 
 		// 	Snake snake4 = player4.getSnake();
 
 		// 	LinkedList<Point> body4 = new LinkedList<Point>();
 
-		// 	body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
-		// 			snakeGame.getGame().getBoard().getHeight() - 1));
-		// 	body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
-		// 			snakeGame.getGame().getBoard().getHeight() - 1));
+		// 	body4.add(new Point(10, 10));
+		// 	body4.add(new Point(9, 10));
+		// 	body4.add(new Point(8, 10));
+		// 	body4.add(new Point(7, 10));
 
+		// 	Point head;
+		// 	// snake4.setLength(3);
 		// 	snake4.setSnakeBody(body4);
+		// 	head = snake4.getSnakeBody().get(0);
+		// 	head  = right(snake4, "U");
+		// 	snake4.setSnakeBody(tailFollow(snake4, head));
 		// }
 
 		Item[] newList = new Item[4];
@@ -139,6 +185,8 @@ public class GameLogicThread extends Thread {
 
 		snakeGame.getPlayers()[0].start();
 		snakeGame.getPlayers()[1].start();
+		snakeGame.getPlayers()[2].start();
+		snakeGame.getPlayers()[3].start();
 
 		while (running) {
 
@@ -293,6 +341,9 @@ public class GameLogicThread extends Thread {
 	}
 
 	public synchronized String calcDirection(Snake snake) {
+
+		System.out.println(count++);
+		System.out.println(snake.getSnakeBody());
 
 		Point head = snake.getSnakeBody().get(0);
 		Point second = snake.getSnakeBody().get(1);
@@ -628,7 +679,7 @@ public class GameLogicThread extends Thread {
 
 		String jsonString = "{\"snake\":";
 
-		for (int i = 0; i < 2; i++) { // TODO generalise for number of players
+		for (int i = 0; i < 4; i++) { // TODO generalise for number of players
 
 			PlayerThread player = snakeGame.getPlayers()[i];
 
@@ -743,7 +794,7 @@ public class GameLogicThread extends Thread {
 
 			// searching through points on the map.
 
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 4; i++) {
 
 				PlayerThread player = snakeGame.getPlayers()[i];
 
