@@ -15,6 +15,60 @@ import org.json.JSONObject;
 
 public final class Client {
 	public static void main(String[] args) {
+		if (args.length == 3)
+		{
+			if (Integer.parseInt(args[1]) >= 2 &&  Integer.parseInt(args[1]) <= 4) 
+			{
+				if (args[2] == "NE" || args[2] == "NW" || args[2] == "SE" || args[2] == "SW")
+				{
+					System.out.println("Creating new game...");
+				}
+			}
+			else
+			{
+				System.out.println("Usage");
+				System.out.println("===============================");
+				System.out.println("java Client new <max> <pos>");
+				System.out.println("java Client <pos>");
+				System.out.println("<max>: {2, 3, 4} ");
+				System.out.println("<pos>: {NE, NW, SE, SW}");
+				System.out.println("===============================");
+				System.exit(0);
+			}
+		}
+		else if (args.length == 1)
+		{	
+			System.out.println(args[0]);
+
+			if (args[0].equals("NE") || args[0].equals("NW") || args[0].equals("SE") || args[0] == "SW")
+			{
+				System.out.println("Joining current game...");
+			}
+			else
+			{
+				System.out.println("Usage");
+				System.out.println("===============================");
+				System.out.println("java Client new <max> <pos>");
+				System.out.println("java Client <pos>");
+				System.out.println("<max>: {2, 3, 4} ");
+				System.out.println("<pos>: {NE, NW, SE, SW}");
+				System.out.println("===============================");
+				System.exit(0);
+			}
+		}
+		else 
+		{
+			System.out.println("here");
+			System.out.println("Usage");
+			System.out.println("===============================");
+			System.out.println("java Client new <max> <pos>");
+			System.out.println("java Client <pos>");
+			System.out.println("<max>: {2, 3, 4} ");
+			System.out.println("<pos>: {NE, NW, SE, SW}");
+			System.out.println("===============================");
+			System.exit(0);
+		}
+
 		Socket socket = null;
 		SnakeFrame frame = null;
 		SnakeModel model = new SnakeModel();
