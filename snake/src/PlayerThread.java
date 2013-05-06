@@ -7,6 +7,7 @@ public class PlayerThread extends Thread {
 	private ServerSocket serverSocket;
 	private Game snakeGame;
 	private Snake snake;
+	public String position = "SE";
 
 	public PlayerThread(Socket clientSocket, ServerSocket serverSocket,
 			Game snakeGame) {

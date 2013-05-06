@@ -54,119 +54,59 @@ static int count = 1;
 		cornerBoard.put(getCorners()[2], null);
 		cornerBoard.put(getCorners()[3], null);
 
-		if (this.snakes.length >= 1) {
-			// first player
-			PlayerThread player1 = snakeGame.getPlayers()[0];
-
-			Snake snake1 = player1.getSnake();
-
-			LinkedList<Point> body1 = new LinkedList<Point>();
-
-			body1.add(new Point(40, 40));
-			body1.add(new Point(39, 40));
-			body1.add(new Point(38, 40));
-			body1.add(new Point(37, 40));
-
-			Point head;
-			snake1.setLength(4);
-			snake1.setSnakeBody(body1);
-			head = snake1.getSnakeBody().get(0);
-			head  = left(snake1, "U");
-			snake1.setSnakeBody(tailFollow(snake1, head));
-		}
-		if (this.snakes.length >= 2)
+		PlayerThread player;
+		for (int i = 0; i < this.snakes.length; i++)
 		{
-			PlayerThread player2 = snakeGame.getPlayers()[1];
-
-			Snake snake2 = player2.getSnake();
-
-			LinkedList<Point> body2 = new LinkedList<Point>();
-
-			// body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
-			// 		snakeGame.getGame().getBoard().getHeight() - 1));
-			// body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
-			// 		snakeGame.getGame().getBoard().getHeight() - 1));
-
-			body2.add(new Point(10, 40));
-			body2.add(new Point(9, 40));
-			body2.add(new Point(8, 40));
-			body2.add(new Point(7, 40));
-
+			player = snakeGame.getPlayers()[i];
+			Snake snake = player.getSnake();
+			LinkedList<Point> body = new LinkedList<Point>();
 			Point head;
-			snake2.setLength(4);
-			snake2.setSnakeBody(body2);
-			head = snake2.getSnakeBody().get(0);
-			head  = right(snake2, "U");
-			snake2.setSnakeBody(tailFollow(snake2, head));
+
+			if (player.position == "NW")
+			{
+				body.add(new Point(10, 5));
+				body.add(new Point(9, 5));
+				body.add(new Point(8, 5));
+				body.add(new Point(7, 5));
+				snake.setSnakeBody(body);
+				head = snake.getSnakeBody().get(0);
+				head  = right(snake, "U");
+				snake.setSnakeBody(tailFollow(snake, head));
+			}
+			else if (player.position == "NE")
+			{
+				body.add(new Point(40, 8));
+				body.add(new Point(40, 7));
+				body.add(new Point(40, 6));
+				body.add(new Point(40, 5));
+				snake.setSnakeBody(body);
+				head = snake.getSnakeBody().get(0);
+				head  = forward(snake, "D");
+				snake.setSnakeBody(tailFollow(snake, head));
+			}
+			else if (player.position == "SE")
+			{
+				body.add(new Point(40, 40));
+				body.add(new Point(39, 40));
+				body.add(new Point(38, 40));
+				body.add(new Point(37, 40));
+				snake.setSnakeBody(body);
+				head = snake.getSnakeBody().get(0);
+				head  = left(snake, "U");
+				snake.setSnakeBody(tailFollow(snake, head));
+			}
+			else if (player.position == "SW")
+			{
+				body.add(new Point(10, 37));
+				body.add(new Point(10, 38));
+				body.add(new Point(10, 39));
+				body.add(new Point(10, 40));
+				snake.setSnakeBody(body);
+				head = snake.getSnakeBody().get(0);
+				head  = forward(snake, "U");
+				snake.setSnakeBody(tailFollow(snake, head));
+			}
 		}
-		if (this.snakes.length >= 3)
-		{
-
-			PlayerThread player3 = snakeGame.getPlayers()[2];
-
-			Snake snake3 = player3.getSnake();
-
-			LinkedList<Point> body3 = new LinkedList<Point>();
-
-
-			body3.add(new Point(40, 10));
-			body3.add(new Point(39, 10));
-			body3.add(new Point(38, 10));
-			body3.add(new Point(37, 10));
-
-			Point head;
-			snake3.setLength(4);
-			snake3.setSnakeBody(body3);
-			head = snake3.getSnakeBody().get(0);
-			head  = left(snake3, "U");
-			snake3.setSnakeBody(tailFollow(snake3, head));
-			System.out.println(snake3.getSnakeBody());
-		}
-		if (this.snakes.length == 4)
-		{
-			PlayerThread player4 = snakeGame.getPlayers()[3];
-
-			Snake snake4 = player4.getSnake();
-
-			LinkedList<Point> body4 = new LinkedList<Point>();
-
-			// body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
-			// 		snakeGame.getGame().getBoard().getHeight() - 1));
-			// body4.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
-			// 		snakeGame.getGame().getBoard().getHeight() - 1));
-
-			body4.add(new Point(10, 10));
-			body4.add(new Point(9, 10));
-			body4.add(new Point(8, 10));
-			body4.add(new Point(7, 10));
-
-			Point head;
-			snake4.setLength(4);
-			snake4.setSnakeBody(body4);
-			head = snake4.getSnakeBody().get(0);
-			head  = right(snake4, "U");
-			snake4.setSnakeBody(tailFollow(snake4, head));
-		}
-		// if (this.snakes.length == 4)
-		// {
-		// 	PlayerThread player4 = snakeGame.getPlayers()[3];
-
-		// 	Snake snake4 = player4.getSnake();
-
-		// 	LinkedList<Point> body4 = new LinkedList<Point>();
-
-		// 	body4.add(new Point(10, 10));
-		// 	body4.add(new Point(9, 10));
-		// 	body4.add(new Point(8, 10));
-		// 	body4.add(new Point(7, 10));
-
-		// 	Point head;
-		// 	// snake4.setLength(3);
-		// 	snake4.setSnakeBody(body4);
-		// 	head = snake4.getSnakeBody().get(0);
-		// 	head  = right(snake4, "U");
-		// 	snake4.setSnakeBody(tailFollow(snake4, head));
-		// }
 
 		Item[] newList = new Item[4];
 
@@ -542,14 +482,7 @@ static int count = 1;
 					}
 					else 
 					{
-						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
-						{
-							liquidSnake.setState(false);
-						}
-						else if (solidSnake.getSnakeBody().size() == liquidSnake.getSnakeBody().size())
-						{
-							liquidSnake.setState(false);
-						}
+						
 					}
 				}
 
