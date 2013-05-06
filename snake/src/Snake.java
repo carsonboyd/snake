@@ -7,12 +7,14 @@ public class Snake {
 	private LinkedList<Point> snakeBody;
 	private int length; // the length of the snake
 	private int itemsEaten; // a record of how many items eaten for the endgame
+	private boolean state; // alive or dead
 
 	public Snake() {
 
 		setSnakeBody(new LinkedList<Point>());
 		setLength(2);
 		setItemsEaten(0);
+		this.state = true;
 
 	}
 
@@ -42,6 +44,16 @@ public class Snake {
 
 	public void grow(Point point) {
 		this.snakeBody.add(point);
+	}
+
+	public boolean getState()
+	{
+		return this.state;
+	}
+
+	public void setState(boolean state)
+	{
+		this.state = state;
 	}
 
 }

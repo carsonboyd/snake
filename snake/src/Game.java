@@ -116,24 +116,26 @@ public class Game {
 			// // System.out.println(player.getSnake().getSnakeBody().size());
 			// // System.out.println("Finished at variables");
 
+
+
 			jsonString += "\"snake" + (i + 1) + "\":[";
 
 			for (int j = 0; j < player.getSnake().getSnakeBody().size(); j++) {
 
-				// newBoard.getGrid().put(player.getSnake().getSnakeBody().get(j),
-				// "Player" + i);
+				if (player.getSnake().getState())
+				{
+					jsonString += "{\"x\":"
+							+ player.getSnake().getSnakeBody().get(j).x + ",\"y\":"
+							+ player.getSnake().getSnakeBody().get(j).y + "}";
 
-				jsonString += "{\"x\":"
-						+ player.getSnake().getSnakeBody().get(j).x + ",\"y\":"
-						+ player.getSnake().getSnakeBody().get(j).y + "}";
+					if (!(j == player.getSnake().getSnakeBody().size() - 1)) {
 
-				if (!(j == player.getSnake().getSnakeBody().size() - 1)) {
+						jsonString += ",";
 
-					jsonString += ",";
-
+					}
 				}
-
 			}
+			
 			if (i == 0)
 				jsonString += "],";
 			else 

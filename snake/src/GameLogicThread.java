@@ -76,10 +76,14 @@ public class GameLogicThread extends Thread {
 
 			LinkedList<Point> body2 = new LinkedList<Point>();
 
-			body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
-					snakeGame.getGame().getBoard().getHeight() - 1));
-			body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
-					snakeGame.getGame().getBoard().getHeight() - 1));
+			// body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 2,
+			// 		snakeGame.getGame().getBoard().getHeight() - 1));
+			// body2.add(new Point(snakeGame.getGame().getBoard().getWidth() - 1,
+			// 		snakeGame.getGame().getBoard().getHeight() - 1));
+
+			body2.add(new Point(10, 1));
+			body2.add(new Point(9, 1));
+			body2.add(new Point(8, 1));
 
 			snake2.setSnakeBody(body2);
 		}
@@ -419,26 +423,84 @@ public class GameLogicThread extends Thread {
 	 */
 	public synchronized void collide() {// TODO
 
+		// check against others
+		for (Snake solidSnake : snakes)
+		{
+			Point solidHead = solidSnake.getSnakeBody().get(0);
+
+			for (Snake liquidSnake : snakes)
+			{
+				if (solidSnake == liquidSnake)
+					continue;
+
+				Point liquidHead = liquidSnake.getSnakeBody().get(0);
+
+				if (solidHead.x == liquidHead.x && solidHead.y == liquidHead.y) {
+					System.out.println("Face off");
+
+					// Check direction
+					String solidDirection = calcDirection(solidSnake);
+					String liquidDirection = calcDirection(liquidSnake);
+
+					if (solidDirection == "L" && liquidDirection == "R")
+					{
+						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
+						{
+							System.out.println(solidSnake);
+							liquidSnake.setState(false);
+						}
+					}
+					else if (solidDirection == "R" && liquidDirection == "L")
+					{
+						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
+						{
+							System.out.println(solidSnake);
+							liquidSnake.setState(false);
+						}
+					}
+					else if (solidDirection == "U" && liquidDirection == "D")
+					{
+						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
+						{
+							System.out.println(solidSnake);
+						}
+					}
+					else if (solidDirection == "D" && liquidDirection == "U")
+					{
+						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
+						{
+							System.out.println(solidSnake);
+						}
+					}
+					else 
+					{
+						// figure out who collided with who
+					}
+				}
+			}
+		}
+
+
 		for (int i = 0; i < snakes.length; i++) {
 
 			Point headPoint = snakes[i].getSnakeBody().get(0);
 
 			// check itself
 
-			for (int j = 1; j < snakes[i].getSnakeBody().size(); j++) {
+			// for (int j = 1; j < snakes[i].getSnakeBody().size(); j++) {
 
-				Point bodyPoint = snakes[i].getSnakeBody().get(j);
+			// 	Point bodyPoint = snakes[i].getSnakeBody().get(j);
 
-				// System.out.println(headPoint.toString());
-				// System.out.println(bodyPoint.toString());
+			// 	System.out.println("HP1 = " + headPoint.toString());
+			// 	System.out.println("BP1 = " + bodyPoint.toString());
 
-				if (headPoint.x == bodyPoint.x && headPoint.y == bodyPoint.y) {
+			// 	if (headPoint.x == bodyPoint.x && headPoint.y == bodyPoint.y) {
 
-					snakeCollision(snakes[i], snakes[i], snakeGame);
+			// 		snakeCollision(snakes[i], snakes[i], snakeGame);
 
-				}
+			// 	}
 
-			}
+			// }
 
 			// check for items
 			for (int j = 0; j < itemCount; j++) {
@@ -452,7 +514,7 @@ public class GameLogicThread extends Thread {
 				}
 			}
 
-			// check against others
+
 
 			// for (int j = 1; j < snakes.length; j++) {
 
@@ -460,7 +522,10 @@ public class GameLogicThread extends Thread {
 
 			// 		Point bodyPoint = snakes[j].getSnakeBody().get(j);
 
-			// 		if (headPoint.x == bodyPoint.y
+			// 		System.out.println("HP2 = " + headPoint.toString());
+			// 		System.out.println("BP2 = " + bodyPoint.toString());
+
+			// 		if (headPoint.x == bodyPoint.x
 			// 				&& headPoint.y == bodyPoint.y) {
 
 			// 			snakeCollision(snakes[i], snakes[j], snakeGame);
@@ -488,6 +553,7 @@ public class GameLogicThread extends Thread {
 
 			// self collision
 
+			System.out.println("Self Collision");
 			removePlayer(snake1, game);
 
 		} else {
@@ -495,8 +561,10 @@ public class GameLogicThread extends Thread {
 			// other snake collision
 
 			if (snake1.getLength() > snake2.getLength()) {
+				System.out.println("Snake 2");
 				removePlayer(snake2, game);
 			} else {
+				System.out.println("Snake 1");
 				removePlayer(snake1, game);
 			}
 
@@ -534,7 +602,7 @@ public class GameLogicThread extends Thread {
 	 */
 	public void winner() {// TODO
 
-		// System.out.println("There is a winner");
+		System.out.println("There is a winner");
 		System.exit(0);
 
 	}
