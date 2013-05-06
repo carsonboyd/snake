@@ -12,7 +12,7 @@ static int count = 1;
 
 	private Board board; // the board that the snakes will be travelling along
 	private Item[] items; // the list of positions of the items on the map
-	private Snake[] snakes = new Snake[4]; // list of snakes
+	private Snake[] snakes = new Snake[0]; // list of snakes
 	private Game snakeGame;
 	private Point[] corners;
 
@@ -24,7 +24,7 @@ static int count = 1;
 				snakeGame.getBoardHeight()));
 		setItems(new Item[snakeGame.getMaxPlayers() - 1]);
 		setSnakeGame(snakeGame);
-		setSnakes(new Snake[4]); // TODO generalise the number of players
+		setSnakes(new Snake[snakeGame.getMaxPlayers()]); // TODO generalise the number of players
 
 	}
 
@@ -101,7 +101,6 @@ static int count = 1;
 		}
 		if (this.snakes.length >= 3)
 		{
-			System.out.println("YOLOSWAG...er");
 
 			PlayerThread player3 = snakeGame.getPlayers()[2];
 
@@ -183,10 +182,8 @@ static int count = 1;
 		//		+ snakeGame.getGame().getItems()[0]);
 		// generateItem();
 
-		snakeGame.getPlayers()[0].start();
-		snakeGame.getPlayers()[1].start();
-		snakeGame.getPlayers()[2].start();
-		snakeGame.getPlayers()[3].start();
+		for (int i = 0; i < this.snakes.length; i++)
+			snakeGame.getPlayers()[i].start();
 
 		while (running) {
 
@@ -545,8 +542,14 @@ static int count = 1;
 					}
 					else 
 					{
-						// TODO: Currently this kills both snakes.
-						liquidSnake.setState(false);
+						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
+						{
+							liquidSnake.setState(false);
+						}
+						else if (solidSnake.getSnakeBody().size() == liquidSnake.getSnakeBody().size())
+						{
+							liquidSnake.setState(false);
+						}
 					}
 				}
 
@@ -679,7 +682,7 @@ static int count = 1;
 
 		String jsonString = "{\"snake\":";
 
-		for (int i = 0; i < 4; i++) { // TODO generalise for number of players
+		for (int i = 0; i < snakeGame.getMaxPlayers(); i++) { // TODO generalise for number of players
 
 			PlayerThread player = snakeGame.getPlayers()[i];
 
@@ -794,7 +797,7 @@ static int count = 1;
 
 			// searching through points on the map.
 
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < snakeGame.getMaxPlayers(); i++) {
 
 				PlayerThread player = snakeGame.getPlayers()[i];
 

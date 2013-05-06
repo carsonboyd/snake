@@ -48,7 +48,7 @@ public class Game {
 
 		Game snakeGame = new Game();
 
-		snakeGame.setPlayers(new PlayerThread[4]);
+		snakeGame.setPlayers(new PlayerThread[snakeGame.getMaxPlayers()]);
 		int numClients = 0;
 		try {
 
@@ -105,9 +105,9 @@ public class Game {
 
 		String jsonString = "{\"snakes\": {";
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < snakeGame.getMaxPlayers(); i++) {
 
-			PlayerThread player = snakeGame.getPlayers()[i];
+
 			// // System.out.println("Starting at variables" + i);
 			// // System.out.println(player);
 			// // // System.out.println(player.getSnake());
@@ -119,20 +119,28 @@ public class Game {
 
 			jsonString += "\"snake" + (i + 1) + "\":[";
 
-			for (int j = 0; j < player.getSnake().getSnakeBody().size(); j++) {
-
+			try {
+				PlayerThread player = snakeGame.getPlayers()[i];
 				if (player.getSnake().getState())
 				{
-					jsonString += "{\"x\":"
-							+ player.getSnake().getSnakeBody().get(j).x + ",\"y\":"
-							+ player.getSnake().getSnakeBody().get(j).y + "}";
+					for (int j = 0; j < player.getSnake().getSnakeBody().size(); j++) {
 
-					if (!(j == player.getSnake().getSnakeBody().size() - 1)) {
 
-						jsonString += ",";
+							jsonString += "{\"x\":"
+									+ player.getSnake().getSnakeBody().get(j).x + ",\"y\":"
+									+ player.getSnake().getSnakeBody().get(j).y + "}";
 
+							if (!(j == player.getSnake().getSnakeBody().size() - 1)) {
+
+								jsonString += ",";
+
+							}
 					}
 				}
+			}
+			catch (Exception e)
+			{
+			e.printStackTrace();
 			}
 
 			if (i == 3)
@@ -143,8 +151,6 @@ public class Game {
 			// else
 		}
 		jsonString += "}";
-		// jsonString += "\"snake3\":[{\"x\":9,\"y\":1},{\"x\":8,\"y\":1},{\"x\":7,\"y\":1}],";
-		// jsonString += "\"snake4\":[{\"x\":5,\"y\":3},{\"x\":6,\"y\":3},{\"x\":7,\"y\":3}]}";
 
 		// go through items
 
@@ -175,7 +181,7 @@ public class Game {
 
 		// System.out.println(jsonString);
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < snakeGame.getMaxPlayers(); i++) {
 
 			try {
 
