@@ -83,6 +83,12 @@ public class GameLogicThread extends Thread {
 			body2.add(new Point(9, 1));
 			body2.add(new Point(8, 1));
 			body2.add(new Point(7, 1));
+			body2.add(new Point(6, 1));
+			body2.add(new Point(5, 1));
+			body2.add(new Point(4, 1));
+			body2.add(new Point(3, 1));
+			body2.add(new Point(2, 1));
+			body2.add(new Point(1, 1));
 
 			snake2.setSnakeBody(body2);
 		}
@@ -510,20 +516,18 @@ public class GameLogicThread extends Thread {
 
 			// check itself
 
-			// for (int j = 1; j < snakes[i].getSnakeBody().size(); j++) {
+			for (int j = 1; j < snakes[i].getSnakeBody().size(); j++) {
 
-			// 	Point bodyPoint = snakes[i].getSnakeBody().get(j);
+				Point bodyPoint = snakes[i].getSnakeBody().get(j);
 
-			// 	System.out.println("HP1 = " + headPoint.toString());
-			// 	System.out.println("BP1 = " + bodyPoint.toString());
+				if (headPoint.x == bodyPoint.x && headPoint.y == bodyPoint.y) {
 
-			// 	if (headPoint.x == bodyPoint.x && headPoint.y == bodyPoint.y) {
+					snakes[i].setState(false);
+					// snakeCollision(snakes[i], snakes[i], snakeGame);
 
-			// 		snakeCollision(snakes[i], snakes[i], snakeGame);
+				}
 
-			// 	}
-
-			// }
+			}
 
 			// check for items
 			for (int j = 0; j < itemCount; j++) {
@@ -536,30 +540,7 @@ public class GameLogicThread extends Thread {
 					break;
 				}
 			}
-
-
-
-			// for (int j = 1; j < snakes.length; j++) {
-
-			// 	for (int k = 0; k < snakes[j].getSnakeBody().size(); k++) {
-
-			// 		Point bodyPoint = snakes[j].getSnakeBody().get(j);
-
-			// 		System.out.println("HP2 = " + headPoint.toString());
-			// 		System.out.println("BP2 = " + bodyPoint.toString());
-
-			// 		if (headPoint.x == bodyPoint.x
-			// 				&& headPoint.y == bodyPoint.y) {
-
-			// 			snakeCollision(snakes[i], snakes[j], snakeGame);
-
-			// 		}
-			// 	}
-
-			// }
-
 		}
-
 	}
 
 	public void itemCollision(Snake snake, Point item, Game game) {
