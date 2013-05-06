@@ -4,9 +4,10 @@ Multiplayer implementation of the game "Snake".  Written in Java.
 
 ##TODO##
 * Initialise a game - Create a game specifying the number of players (Mitch).
-* Collision Detection - Ensure snake collision works properly (Mitch).
+* Collision Detection - Ensure snake collision works properly (Head on, self, food) (Mitch).
 * Remove a player - When a snake dies, remove it from the game (Mitch - client side).
 * Fix up the grid size (Mitch).
+* Check game state to winner and report to Client
 * Clean up all the code (Mitch).
 
 ##Complete##

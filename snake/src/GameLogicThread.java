@@ -58,8 +58,6 @@ public class GameLogicThread extends Thread {
 
 			LinkedList<Point> body1 = new LinkedList<Point>();
 
-			body1.add(new Point(5, 0));
-			body1.add(new Point(4, 0));
 			body1.add(new Point(3, 0));
 			body1.add(new Point(2, 0));
 			body1.add(new Point(1, 0));
@@ -84,6 +82,7 @@ public class GameLogicThread extends Thread {
 			body2.add(new Point(10, 1));
 			body2.add(new Point(9, 1));
 			body2.add(new Point(8, 1));
+			body2.add(new Point(7, 1));
 
 			snake2.setSnakeBody(body2);
 		}
@@ -446,7 +445,10 @@ public class GameLogicThread extends Thread {
 					{
 						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
 						{
-							System.out.println(solidSnake);
+							liquidSnake.setState(false);
+						}
+						else if (solidSnake.getSnakeBody().size() == liquidSnake.getSnakeBody().size())
+						{
 							liquidSnake.setState(false);
 						}
 					}
@@ -454,7 +456,10 @@ public class GameLogicThread extends Thread {
 					{
 						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
 						{
-							System.out.println(solidSnake);
+							liquidSnake.setState(false);
+						}
+						else if (solidSnake.getSnakeBody().size() == liquidSnake.getSnakeBody().size())
+						{
 							liquidSnake.setState(false);
 						}
 					}
@@ -462,14 +467,22 @@ public class GameLogicThread extends Thread {
 					{
 						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
 						{
-							System.out.println(solidSnake);
+							liquidSnake.setState(false);
+						}
+						else if (solidSnake.getSnakeBody().size() == liquidSnake.getSnakeBody().size())
+						{
+							liquidSnake.setState(false);
 						}
 					}
 					else if (solidDirection == "D" && liquidDirection == "U")
 					{
 						if (solidSnake.getSnakeBody().size() > liquidSnake.getSnakeBody().size())
 						{
-							System.out.println(solidSnake);
+							liquidSnake.setState(false);
+						}
+						else if (solidSnake.getSnakeBody().size() == liquidSnake.getSnakeBody().size())
+						{
+							liquidSnake.setState(false);
 						}
 					}
 					else 
