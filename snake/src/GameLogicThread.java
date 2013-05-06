@@ -434,7 +434,8 @@ public class GameLogicThread extends Thread {
 
 				Point liquidHead = liquidSnake.getSnakeBody().get(0);
 
-				if (solidHead.x == liquidHead.x && solidHead.y == liquidHead.y) {
+				if (solidHead.x == liquidHead.x && solidHead.y == liquidHead.y) 
+				{
 					System.out.println("Face off");
 
 					// Check direction
@@ -487,8 +488,17 @@ public class GameLogicThread extends Thread {
 					}
 					else 
 					{
-						// figure out who collided with who
+						// TODO: Currently this kills both snakes.
+						liquidSnake.setState(false);
 					}
+				}
+
+				for (Point liquidBody : liquidSnake.getSnakeBody())
+				{
+					if (solidHead.x == liquidBody.x && solidHead.y == liquidBody.y)
+					{
+						solidSnake.setState(false);
+					}	
 				}
 			}
 		}
